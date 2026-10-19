@@ -154,9 +154,16 @@ describe('Settings — reset everything', () => {
 })
 
 describe('Settings — footer', () => {
-  it('links the source code to its home on GitHub, on About & updates', () => {
+  it('links the source code of this build (the N3XUS fork), on About & updates', () => {
     act(() => root.render(<Settings page="about" />))
     const link = [...host.querySelectorAll('a')].find(a => a.textContent === 'Source code')
+    expect(link.getAttribute('href')).toBe('https://github.com/N3xusD3v/n3xus-gym')
+  })
+
+  it('keeps the credit and link to the original openGym (AGPL attribution)', () => {
+    act(() => root.render(<Settings page="about" />))
+    const link = [...host.querySelectorAll('a')].find(a => a.textContent === 'openGym')
     expect(link.getAttribute('href')).toBe('https://github.com/DuarteSantos8/openGym')
+    expect(host.textContent).toContain('N3XUS Gym v')
   })
 })
