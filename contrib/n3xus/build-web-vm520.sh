@@ -21,5 +21,5 @@ CMD=(docker build -f web/Dockerfile -t "n3xus-gym-web:$TAG"
 # ssh junta os argumentos numa linha de shell remota: %q mantém as aspas
 git archive --format=tar HEAD frontend api/coach/core web catalogue/media .dockerignore \
   | ssh "$VM" "$(printf '%q ' "${CMD[@]}")"
-ssh "$VM" docker image inspect "n3xus-gym-web:$TAG" --format '{{.Id}} {{.Size}}'
+ssh "$VM" "docker image inspect n3xus-gym-web:$TAG --format '{{.Id}} {{.Size}}'"
 echo "OK n3xus-gym-web:$TAG"
